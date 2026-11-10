@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="280" viewBox="0 0 1280 280" role="img" aria-labelledby="title">
+  <title id="title">Ethan Draw - Qing Mo</title>
+  <rect width="1280" height="280" fill="#0c1210"/>
+  <path d="M804 0h476v280H804z" fill="#101815"/>
+  <g stroke="#35463c" stroke-width="1" opacity=".65"><path d="M840 0v280M904 0v280M968 0v280M1032 0v280M1096 0v280M1160 0v280M1224 0v280"/><path d="M804 56h476M804 120h476M804 184h476M804 248h476"/></g>
+  <path d="M72 40h1136M72 239h1136" stroke="#26332c"/>
+  <circle cx="1030" cy="137" r="77" fill="#141c18" stroke="#586b5c"/>
+  <circle cx="1030" cy="137" r="61" fill="none" stroke="#c9a36a"/>
+  <path d="M961 158c42-22 70-18 99-2s55 14 95-13M969 173c39-17 63-14 93 1 32 16 58 10 87-9" stroke="#8fa88e" stroke-width="2" fill="none"/>
+  <circle cx="1030" cy="137" r="4" fill="#c9a36a"/>
+  <text x="72" y="61" fill="#6a736c" font-family="Georgia,serif" font-size="13" letter-spacing="8">EAST OF DEFAULT</text>
+  <text x="72" y="145" fill="#e8e2d4" font-family="'Noto Serif SC',Georgia,serif" font-size="56">青墨</text>
+  <path d="M200 105v48" stroke="#c9a36a"/>
+  <text x="224" y="145" fill="#e8e2d4" font-family="Georgia,serif" font-size="43">Ethan Draw</text>
+  <text x="72" y="190" fill="#a4aaa1" font-family="Arial,sans-serif" font-size="17">深底是松烟，金色只作标点，不作描边。</text>
+  <text x="72" y="221" fill="#8d948b" font-family="Georgia,serif" font-size="15">A quiet workspace for tools, tests, and ideas.</text>
+  <text x="72" y="254" fill="#6a736c" font-family="Arial,sans-serif" font-size="10" letter-spacing="2">AI TOOLING　·　AUTOMATION　·　WEB</text>
+</svg>

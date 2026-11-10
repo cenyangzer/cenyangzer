@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="280" viewBox="0 0 1280 280" role="img" aria-labelledby="title">
+  <title id="title">Ethan Draw - Su Jian</title>
+  <rect width="1280" height="280" fill="#f3eee4"/>
+  <rect width="8" height="280" fill="#b64a3a"/>
+  <path d="M804 0h476v280H804z" fill="#ebe4d6"/>
+  <g stroke="#c4b8a6" stroke-width="1" opacity=".55"><path d="M840 0v280M904 0v280M968 0v280M1032 0v280M1096 0v280M1160 0v280M1224 0v280"/><path d="M804 56h476M804 120h476M804 184h476M804 248h476"/></g>
+  <circle cx="1030" cy="137" r="77" fill="#f3eee4" stroke="#c4b8a6"/>
+  <circle cx="1030" cy="137" r="61" fill="none" stroke="#b64a3a"/>
+  <path d="M961 158c42-22 70-18 99-2s55 14 95-13M969 173c39-17 63-14 93 1 32 16 58 10 87-9" stroke="#7d9182" stroke-width="2" fill="none"/>
+  <circle cx="1030" cy="137" r="4" fill="#b64a3a"/>
+  <text x="72" y="61" fill="#a3988a" font-family="Georgia,serif" font-size="13" letter-spacing="8">EAST OF DEFAULT</text>
+  <text x="72" y="145" fill="#1b1712" font-family="'Noto Serif SC',Georgia,serif" font-size="56">素笺</text>
+  <path d="M200 105v48" stroke="#c4b8a6"/>
+  <text x="224" y="145" fill="#1b1712" font-family="Georgia,serif" font-size="43">Ethan Draw</text>
+  <text x="72" y="190" fill="#746b60" font-family="Arial,sans-serif" font-size="17">建造、验证，让复杂工具变成可跟着做的步骤。</text>
+  <text x="72" y="221" fill="#746b60" font-family="Georgia,serif" font-size="15">Build with care. Make complex tools easier to use.</text>
+  <text x="72" y="254" fill="#a3988a" font-family="Arial,sans-serif" font-size="10" letter-spacing="2">AI TOOLING　·　AUTOMATION　·　WEB</text>
+</svg>
