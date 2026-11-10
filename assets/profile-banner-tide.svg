@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" fill="none">
+  <rect width="1200" height="320" fill="#171713"/>
+  <path d="M0 0H1200V320H0z" fill="url(#ground)"/>
+  <g stroke="#DED7C8" stroke-width="1" opacity=".075">
+    <path d="M64 0v320M128 0v320M192 0v320M256 0v320M320 0v320M384 0v320M448 0v320M512 0v320M576 0v320M640 0v320M704 0v320M768 0v320M832 0v320M896 0v320M960 0v320M1024 0v320M1088 0v320M1152 0v320"/>
+    <path d="M0 64h1200M0 128h1200M0 192h1200M0 256h1200"/>
+  </g>
+  <path d="M722 236c82-19 106-77 176-82 68-5 89 47 164 30 49-11 84-47 138-43" stroke="#B5A98D" stroke-width="1" opacity=".46"/>
+  <path d="M712 257c92-25 111-75 181-80 65-5 91 42 167 26 54-12 87-45 140-42" stroke="#B5A98D" stroke-width="1" opacity=".3"/>
+  <circle cx="958" cy="128" r="86" stroke="#C9BFA9" stroke-width="1" opacity=".25"/>
+  <circle cx="958" cy="128" r="70" stroke="#C9BFA9" stroke-width="1" opacity=".48"/>
+  <circle cx="958" cy="128" r="53" fill="url(#orb)"/>
+  <path d="M907 138c25-26 46-37 70-35 22 2 38 18 58 16" stroke="#E8DDC6" stroke-width="1" opacity=".7"/>
+  <path d="M913 151c28-20 45-27 66-24 18 3 31 12 48 10" stroke="#D16F50" stroke-width="1.5" opacity=".9"/>
+  <path d="M958 27v202M857 128h202" stroke="#C9BFA9" stroke-width="1" opacity=".18"/>
+  <circle cx="958" cy="128" r="3" fill="#D16F50"/>
+  <rect x="72" y="58" width="31" height="31" fill="#C75E43"/>
+  <text x="81" y="80" fill="#171713" font-family="Georgia,serif" font-size="17" font-weight="700">E</text>
+  <text x="72" y="158" fill="#F0E9DA" font-family="Georgia,'Times New Roman',serif" font-size="57" letter-spacing="9">ETHAN DRAW</text>
+  <path d="M73 181h321" stroke="#C9BFA9" stroke-width="1" opacity=".25"/>
+  <text x="74" y="211" fill="#B5A98D" font-family="Arial,sans-serif" font-size="12" letter-spacing="4">INDEPENDENT BUILDER</text>
+  <text x="74" y="245" fill="#E9E1D2" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="19">独立开发者 · 做点有用的东西</text>
+  <text x="74" y="273" fill="#A9A294" font-family="Arial,sans-serif" font-size="14">Practical tools, made with curiosity.</text>
+  <text x="74" y="302" fill="#827B6D" font-family="Arial,sans-serif" font-size="10" letter-spacing="2.1">AI TOOLING　/　AUTOMATION　/　WEB</text>
+  <text x="1092" y="302" fill="#827B6D" font-family="Arial,sans-serif" font-size="10" letter-spacing="1.3">C / YZ</text>
+  <defs>
+    <linearGradient id="ground" x1="1200" y1="0" x2="568" y2="383" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#29271F" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#171713" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="0" cy="0" r="1" gradientTransform="matrix(77 56 -63 87 939 104)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#AAA087"/>
+      <stop offset=".58" stop-color="#665F50"/>
+      <stop offset="1" stop-color="#34332B"/>
+    </radialGradient>
+  </defs>
+</svg>
