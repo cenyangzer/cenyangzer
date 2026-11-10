@@ -33,7 +33,7 @@
   </picture>
 </p>
 
-<p align="center"><sub>方格来自 GitHub 真实贡献记录；线条只连接有贡献的日期。动画可关闭，不会添加虚构记录。<br>Cells reflect real GitHub contributions; the trail only connects active dates. A static image is used when reduced motion is preferred.</sub></p>
+<p align="center"><sub>方格与计数来自 GitHub 真实记录；微光、余辉和呼吸格只沿实际贡献日期运行。<br>Cells and counts reflect real GitHub activity. Motion follows active dates; a static image is used when reduced motion is preferred.</sub></p>
 
 ### Current interests · 持续探索
 

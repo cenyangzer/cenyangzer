@@ -147,24 +147,47 @@ function escapeXml(value) {
 
 function routePath(activeDays) {
   const points = activeDays.map((day) => datePosition.get(day.date));
-  if (points.length === 0) return "";
+  if (points.length === 0) return { path: "", keyPoints: "", keyTimes: "" };
+  if (points.length === 1) {
+    return {
+      path: `M ${points[0].x} ${points[0].y}`,
+      keyPoints: "0",
+      keyTimes: "0"
+    };
+  }
 
   let path = `M ${points[0].x} ${points[0].y}`;
+  const cumulativeLengths = [0];
   for (let index = 1; index < points.length; index += 1) {
     const previous = points[index - 1];
     const current = points[index];
+    let distance = 0;
     if (previous.x === current.x || previous.y === current.y) {
       path += ` L ${current.x} ${current.y}`;
-      continue;
+      distance = Math.abs(current.x - previous.x) + Math.abs(current.y - previous.y);
+    } else {
+      const elbowX = (previous.x + current.x) / 2;
+      path += ` H ${elbowX} V ${current.y} H ${current.x}`;
+      distance = Math.abs(elbowX - previous.x) + Math.abs(current.y - previous.y) + Math.abs(current.x - elbowX);
     }
-
-    const elbowX = (previous.x + current.x) / 2;
-    path += ` H ${elbowX} V ${current.y} H ${current.x}`;
+    cumulativeLengths.push(cumulativeLengths.at(-1) + distance);
   }
-  return path;
+
+  const totalLength = cumulativeLengths.at(-1);
+  const firstTime = Date.parse(`${activeDays[0].date}T00:00:00Z`);
+  const lastTime = Date.parse(`${activeDays.at(-1).date}T00:00:00Z`);
+  const totalTime = lastTime - firstTime;
+  return {
+    path,
+    keyPoints: cumulativeLengths.map((length) => (length / totalLength).toFixed(4)).join(";"),
+    keyTimes: activeDays.map((day) => {
+      const time = Date.parse(`${day.date}T00:00:00Z`);
+      return ((time - firstTime) / totalTime).toFixed(4);
+    }).join(";")
+  };
 }
 
-const activeDays = cells.filter((day) => day.level > 0);
+const activeDays = cells.filter((day) => day.count > 0);
 const route = routePath(activeDays);
 const monthLabels = [];
 let lastMonth = "";
@@ -187,17 +210,21 @@ const summary = `${contributionTotal.toLocaleString("en")} contributions · ${ce
 function createSvg(themeName, animated) {
   const theme = themes[themeName];
   const dayCells = cells.map((day) => {
-    const { x, y } = datePosition.get(day.date);
+    const position = datePosition.get(day.date);
+    const { x, y } = position;
     const countLabel = day.count === 0 ? "No contributions" : `${day.count} contribution${day.count === 1 ? "" : "s"}`;
-    return `<rect x="${x - grid.cell / 2}" y="${y - grid.cell / 2}" width="${grid.cell}" height="${grid.cell}" rx="3" fill="${theme.levels[day.level]}"><title>${day.date}: ${countLabel} (level ${day.level})</title></rect>`;
+    const pulse = animated && day.count > 0
+      ? `<animate attributeName="opacity" values=".72;1;.72" dur="3.8s" begin="-${((position.week * 0.37) % 3.8).toFixed(2)}s" repeatCount="indefinite"/>`
+      : "";
+    return `<rect x="${x - grid.cell / 2}" y="${y - grid.cell / 2}" width="${grid.cell}" height="${grid.cell}" rx="3" fill="${theme.levels[day.level]}">${pulse}<title>${day.date}: ${countLabel} (level ${day.level})</title></rect>`;
   }).join("");
 
-  const routeMarkup = route
-    ? `<path d="${route}" fill="none" stroke="${theme.route}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".58"/>`
+  const routeMarkup = route.path
+    ? `<path d="${route.path}" fill="none" stroke="${theme.route}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".26"/>${animated ? `<path d="${route.path}" pathLength="1" fill="none" stroke="${theme.route}" stroke-width="2.2" stroke-linecap="round" stroke-dasharray=".018 .982" opacity=".8" class="route-flow"><animate attributeName="stroke-dashoffset" values="0;-1" dur="7.5s" repeatCount="indefinite"/></path>` : ""}`
     : "";
   const runner = route
     ? animated
-      ? `<circle r="4" fill="${theme.route}" class="motion-marker"><animateMotion dur="64s" repeatCount="indefinite" path="${route}"/><animate attributeName="opacity" values=".65;1;.65" dur="2.4s" repeatCount="indefinite"/></circle><circle cx="${datePosition.get(activeDays.at(-1).date).x}" cy="${datePosition.get(activeDays.at(-1).date).y}" r="3" fill="${theme.route}" class="static-marker"/>`
+      ? `<g class="motion-marker"><animateMotion dur="72s" repeatCount="indefinite" calcMode="linear" keyPoints="${route.keyPoints}" keyTimes="${route.keyTimes}" path="${route.path}"/><circle r="8" fill="${theme.route}" opacity=".16"><animate attributeName="r" values="5;9;5" dur="2.8s" repeatCount="indefinite"/><animate attributeName="opacity" values=".1;.25;.1" dur="2.8s" repeatCount="indefinite"/></circle><circle r="3.2" fill="${theme.route}"/></g><circle r="2.2" fill="${theme.route}" opacity=".48" class="motion-marker"><animateMotion dur="72s" begin="-3s" repeatCount="indefinite" calcMode="linear" keyPoints="${route.keyPoints}" keyTimes="${route.keyTimes}" path="${route.path}"/></circle><circle r="1.5" fill="${theme.route}" opacity=".25" class="motion-marker"><animateMotion dur="72s" begin="-6s" repeatCount="indefinite" calcMode="linear" keyPoints="${route.keyPoints}" keyTimes="${route.keyTimes}" path="${route.path}"/></circle><circle cx="${datePosition.get(activeDays.at(-1).date).x}" cy="${datePosition.get(activeDays.at(-1).date).y}" r="3" fill="${theme.route}" class="static-marker"/>`
       : `<circle cx="${datePosition.get(activeDays.at(-1).date).x}" cy="${datePosition.get(activeDays.at(-1).date).y}" r="3" fill="${theme.route}"/>`
     : "";
 
@@ -206,9 +233,8 @@ function createSvg(themeName, animated) {
   <title id="title">${escapeXml(username)} · Build Trail</title>
   <desc id="description">A trail connecting days with real GitHub contributions. ${escapeXml(summary)}. Generated ${generatedAt}.</desc>
   <style>
-    text{font-family:Arial,sans-serif}.month{fill:${theme.muted};font-size:10px;letter-spacing:.3px}.summary{fill:${theme.muted};font-size:11px}.level-label{fill:${theme.muted};font-size:10px}.static-marker{display:none}
-    @media(prefers-reduced-motion:reduce){.motion-marker{display:none}.static-marker{display:block}}
-  </style>
+    text{font-family:Arial,sans-serif}.month{fill:${theme.muted};font-size:10px;letter-spacing:.3px}.summary{fill:${theme.muted};font-size:11px}.level-label{fill:${theme.muted};font-size:10px}.static-marker{display:${animated ? "none" : "block"}}
+${animated ? "    @media(prefers-reduced-motion:reduce){.motion-marker,.route-flow{display:none}.static-marker{display:block}}\n" : ""}  </style>
   <rect width="${width}" height="${height}" rx="8" fill="${theme.background}"/>
   <text x="34" y="20" fill="${theme.ink}" font-size="11" letter-spacing="2">BUILD TRAIL　/　REAL CONTRIBUTIONS</text>
   ${monthLabels.join("\n  ")}
