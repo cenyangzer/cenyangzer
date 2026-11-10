@@ -1,0 +1,42 @@
+name: Update contribution trail
+
+on:
+  schedule:
+    - cron: "23 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: contribution-trail
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out profile
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Generate contribution trail
+        run: node scripts/generate-contribution-trail.mjs
+
+      - name: Commit changed trail assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/contribution-trail-*.svg
+          if git diff --cached --quiet; then
+            echo "Contribution trail is already up to date."
+          else
+            git commit -m "chore(profile): refresh contribution trail"
+            git push
+          fi
